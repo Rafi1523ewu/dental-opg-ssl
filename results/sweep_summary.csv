@@ -1,0 +1,6 @@
+experiment,model,image_size,method,labeled_fraction,folds,val_macro_auroc_mean,val_macro_auroc_std,test_macro_auroc_mean,test_macro_auroc_std,test_macro_ap_mean,test_macro_ap_std,test_macro_f1_mean,test_macro_f1_std
+convnext_tiny_224,convnext_tiny,224,supervised,0.5,2,0.6307,0.0395,0.6444,0.0991,0.4721,0.1075,0.3863,0.1249
+convnext_tiny_384,convnext_tiny,384,supervised,0.5,2,0.6308,0.0314,0.6217,0.0791,0.4754,0.1214,0.3761,0.1348
+efficientnet_b2_224,efficientnet_b2,224,supervised,0.5,2,0.601,0.1091,0.6075,0.0077,0.3975,0.0532,0.3037,0.0156
+efficientnet_b2_384,efficientnet_b2,384,supervised,0.5,2,0.5978,0.0586,0.6897,0.0068,0.4505,0.0527,0.3879,0.0257
+vit_b16_224,vit_b16,224,supervised,0.5,2,0.5716,0.0056,0.6092,0.133,0.3587,0.0665,0.3086,0.0732

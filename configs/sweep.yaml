@@ -1,0 +1,35 @@
+# Backbone and input-resolution search, run before the main grid.
+# Ranked by mean validation macro-AUROC; the test split plays no part in the choice.
+# Panoramic X-rays are wide and detailed, so resolution is searched alongside the backbone.
+
+grid:
+  - name: efficientnet_b2_224
+    model: efficientnet_b2
+    overrides: {data: {image_size: 224}}
+    methods: [supervised]
+    fractions: [0.5]
+    folds: [0, 1]
+  - name: efficientnet_b2_384
+    model: efficientnet_b2
+    overrides: {data: {image_size: 384}}
+    methods: [supervised]
+    fractions: [0.5]
+    folds: [0, 1]
+  - name: convnext_tiny_224
+    model: convnext_tiny
+    overrides: {data: {image_size: 224}}
+    methods: [supervised]
+    fractions: [0.5]
+    folds: [0, 1]
+  - name: convnext_tiny_384
+    model: convnext_tiny
+    overrides: {data: {image_size: 384}}
+    methods: [supervised]
+    fractions: [0.5]
+    folds: [0, 1]
+  - name: vit_b16_224
+    model: vit_b16
+    overrides: {data: {image_size: 224}}
+    methods: [supervised]
+    fractions: [0.5]
+    folds: [0, 1]

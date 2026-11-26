@@ -1,0 +1,34 @@
+# Hyperparameters shared by every run. Method, model, labeled fraction and CV fold
+# come from the command line (single run) or from the grid below (scripts/run_grid.py).
+
+data:
+  exclude_classes: [Healthy Teeth]  # present on almost every image, so not a useful target
+  n_folds: 5               # each unique X-ray is in exactly one test fold
+  cv_seed: 42
+  val_size: 0.20           # share of the non-test images, used only for checkpoint selection
+  image_size: 224
+  num_workers: 2
+
+train:
+  steps: 1000              # fixed optimisation steps, independent of how many labels exist
+  eval_every: 50
+  batch_size: 8            # labeled images per step (fits 384 px SSL on a 16 GB T4)
+  unlabeled_ratio: 2       # unlabeled images per step = ratio * batch_size
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  pretrained: true
+
+ssl:
+  threshold: 0.95          # FixMatch: per-label confidence needed to use a pseudo-label
+  unlabeled_weight: 1.0    # FixMatch: weight of the pseudo-label loss
+  consistency_weight: 10.0 # Mean Teacher; MSE between sigmoids is small, so it needs a larger weight
+  consistency_rampup: 0.3  # share of steps over which the Mean Teacher weight ramps up
+  ema_decay: 0.999
+  randaugment_ops: 2
+  randaugment_magnitude: 10
+
+grid:
+  - model: efficientnet_b2
+    methods: [supervised, fixmatch, meanteacher]
+    fractions: [0.2, 0.3, 0.5]
+    folds: [0, 1, 2, 3, 4]
